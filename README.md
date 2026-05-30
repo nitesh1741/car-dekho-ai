@@ -1,5 +1,7 @@
 # Car Shortlist Assistant
 
+**Live app:** [https://car-dekho-ai.vercel.app/](https://car-dekho-ai.vercel.app/)
+
 Full-stack web app for the [CarDekho Group AI-native software engineer assignment](CarDekho%20Group%20_%20AI%20Assignment.pdf). It helps a confused car buyer move from “I don’t know what to buy” to a confident, explainable shortlist.
 
 ## What I Built and Why
