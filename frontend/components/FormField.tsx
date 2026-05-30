@@ -16,29 +16,29 @@ export default function FormField({
   children,
 }: FormFieldProps) {
   return (
-    <div className="flex flex-col gap-2 bg-slate-900/30 border border-slate-800/40 p-4 rounded-xl backdrop-blur-sm transition-all hover:border-slate-800">
-      <div className="flex justify-between items-start">
+    <div className="flex flex-col gap-2 p-5 rounded-xl border border-[var(--border)] bg-[var(--bg-elevated)] transition-colors hover:border-[var(--border-strong)]">
+      <div className="flex justify-between items-start gap-3">
         <label
           htmlFor={id}
-          className="text-sm font-bold text-slate-200 tracking-wide"
+          className="text-sm font-semibold text-[var(--text-primary)]"
         >
           {label}
         </label>
         {error && (
           <span
             id={`${id}-error`}
-            className="text-xs text-rose-400 bg-rose-500/10 px-2 py-0.5 rounded border border-rose-500/20 font-medium animate-pulse"
+            className="text-xs text-[var(--error)] font-medium whitespace-nowrap"
           >
             {error}
           </span>
         )}
       </div>
       {description && (
-        <p className="text-xs text-slate-400 leading-normal max-w-xl">
+        <p className="text-sm text-[var(--text-muted)] leading-relaxed">
           {description}
         </p>
       )}
-      <div className="mt-1">{children}</div>
+      <div>{children}</div>
     </div>
   );
 }

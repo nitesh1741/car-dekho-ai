@@ -7,64 +7,104 @@ interface RecommendationResultsProps {
   onAdjust: () => void;
 }
 
-export default function RecommendationResults({ recommendations, onAdjust }: RecommendationResultsProps) {
-  // Show top 3 recommendations
+export default function RecommendationResults({
+  recommendations,
+  onAdjust,
+}: RecommendationResultsProps) {
   const topRecommendations = recommendations.slice(0, 3);
 
   return (
-    <div className="bg-slate-800/40 border border-slate-700/40 rounded-2xl p-6 lg:p-8 backdrop-blur-md shadow-2xl flex flex-col gap-6">
-      <h2 className="text-2xl font-bold text-slate-200 flex items-center justify-between">
-        Recommendation Results
-        <button
-          onClick={onAdjust}
-          className="text-sm font-medium text-indigo-300 hover:text-indigo-100 transition"
-        >
-          Adjust Preferences
+    <div className="flex flex-col gap-8">
+      <div className="flex items-center justify-between">
+        <p className="text-sm text-[var(--text-muted)]">
+          Showing top {topRecommendations.length} of {recommendations.length}
+        </p>
+        <button type="button" onClick={onAdjust} className="btn-secondary text-sm">
+          Adjust preferences
         </button>
-      </h2>
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-        {topRecommendations.map((rec) => (
-          <CarCard key={rec.car.id} recommendation={rec} />
+      </div>
+
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
+        {topRecommendations.map((rec, i) => (
+          <CarCard key={rec.car.id} recommendation={rec} rank={i + 1} />
         ))}
       </div>
-      <ComparisonTable recommendations={recommendations} />
+
+      {recommendations.length > 3 && (
+        <ComparisonTable recommendations={recommendations} />
+      )}
     </div>
   );
 }
 
-const ComparisonTable: React.FC<{ recommendations: RecommendedCar[] }> = ({ recommendations }) => {
+const ComparisonTable: React.FC<{ recommendations: RecommendedCar[] }> = ({
+  recommendations,
+}) => {
   return (
-    <div className="overflow-x-auto">
-      <table className="min-w-full text-sm text-left text-slate-300">
-        <thead className="bg-slate-900/30 text-xs uppercase text-slate-400">
-          <tr>
-            <th className="px-3 py-2">Car</th>
-            <th className="px-3 py-2">Score</th>
-            <th className="px-3 py-2">Price (L)</th>
-            <th className="px-3 py-2">Mileage</th>
-            <th className="px-3 py-2">Safety</th>
-            <th className="px-3 py-2">Seating</th>
-            <th className="px-3 py-2">Reasons</th>
-            <th className="px-3 py-2">Tradeoffs</th>
-          </tr>
-        </thead>
-        <tbody>
-          {recommendations.map((rec) => (
-            <tr key={rec.car.id} className="border-b border-slate-800/30">
-              <td className="px-3 py-2 text-slate-200 font-medium">
-                {rec.car.make} {rec.car.model} {rec.car.variant}
-              </td>
-              <td className="px-3 py-2">{rec.score} pts</td>
-              <td className="px-3 py-2">{rec.car.priceLakh}L</td>
-              <td className="px-3 py-2">{rec.car.mileage} kmpl</td>
-              <td className="px-3 py-2">{rec.car.safetyRating}/5</td>
-              <td className="px-3 py-2">{rec.car.seating}</td>
-              <td className="px-3 py-2 text-xs text-slate-400">{rec.reasons?.join(", ")}</td>
-              <td className="px-3 py-2 text-xs text-slate-500">{rec.tradeoffs?.join(", ")}</td>
+    <div className="card overflow-hidden">
+      <div className="px-5 py-4 border-b border-[var(--border)]">
+        <h3 className="font-semibold text-[var(--text-primary)]">
+          Full comparison
+        </h3>
+        <p className="text-sm text-[var(--text-muted)] mt-0.5">
+          All matched cars side by side
+        </p>
+      </div>
+      <div className="overflow-x-auto">
+        <table className="min-w-full text-sm">
+          <thead>
+            <tr className="border-b border-[var(--border)] bg-[var(--bg-muted)]">
+              {["Car", "Fit", "Price", "Mileage", "Safety", "Seats"].map(
+                (h) => (
+                  <th
+                    key={h}
+                    className="px-4 py-3 text-left text-xs font-semibold uppercase tracking-wider text-[var(--text-muted)]"
+                  >
+                    {h}
+                  </th>
+                )
+              )}
             </tr>
-          ))}
-        </tbody>
-      </table>
+          </thead>
+          <tbody>
+            {recommendations.map((rec, i) => (
+              <tr
+                key={rec.car.id}
+                className="border-b border-[var(--border)] last:border-0 hover:bg-[var(--bg-muted)]/50 transition-colors"
+              >
+                <td className="px-4 py-3">
+                  <div className="font-medium text-[var(--text-primary)]">
+                    {rec.car.make} {rec.car.model}
+                  </div>
+                  <div className="text-xs text-[var(--text-muted)]">
+                    {rec.car.variant}
+                  </div>
+                </td>
+                <td className="px-4 py-3">
+                  <span className="font-semibold text-[var(--success)]">
+                    {rec.score}%
+                  </span>
+                  <span className="text-[var(--text-muted)] text-xs ml-1">
+                    #{i + 1}
+                  </span>
+                </td>
+                <td className="px-4 py-3 text-[var(--text-secondary)]">
+                  ₹{rec.car.priceLakh}L
+                </td>
+                <td className="px-4 py-3 text-[var(--text-secondary)]">
+                  {rec.car.mileage} kmpl
+                </td>
+                <td className="px-4 py-3 text-[var(--text-secondary)]">
+                  {rec.car.safetyRating}/5
+                </td>
+                <td className="px-4 py-3 text-[var(--text-secondary)]">
+                  {rec.car.seating}
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
     </div>
   );
 };
