@@ -4,7 +4,7 @@ Car Shortlist Assistant is a full-stack web app for the CarDekho Group AI-native
 
 ## Current Status
 
-Phase 1 is the repository baseline. The project skeleton, documentation, and git workflow are being established before backend and frontend implementation begins.
+Phase 2 adds the FastAPI backend foundation with a `/health` endpoint and pytest coverage.
 
 ## Planned Architecture
 
@@ -40,12 +40,25 @@ Primary spec:
 
 ## Local Setup
 
-Local setup commands will be added as backend and frontend projects are scaffolded in later phases.
+Backend:
+
+```powershell
+cd backend
+uvicorn app.main:app --reload
+```
+
+Health check:
+
+```text
+GET http://127.0.0.1:8000/health
+```
+
+Frontend setup commands will be added in Phase 6.
 
 ## Testing
 
 Test commands will be added phase by phase:
 
-- Backend tests begin in Phase 2.
+- Backend: `python -m pytest backend`
 - Frontend checks begin in Phase 6.
 - End-to-end verification is completed in Phase 10.
