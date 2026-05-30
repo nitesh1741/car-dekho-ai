@@ -1,8 +1,8 @@
 from collections.abc import Iterable
 
-from backend.app.models import Car
-from backend.app.repository import load_cars
-from backend.app.schemas import (
+from .models import Car
+from .repository import load_cars
+from .schemas import (
     MatchedCriteria,
     RecommendationPreferences,
     RecommendationResponse,

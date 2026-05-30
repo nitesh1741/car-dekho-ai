@@ -2,7 +2,7 @@ from typing import Literal, List
 
 from pydantic import BaseModel, ConfigDict, Field, model_validator
 
-from backend.app.models import BodyType, Car, FuelType, UsageTag
+from .models import BodyType, Car, FuelType, UsageTag
 
 TransmissionPreference = Literal["manual", "automatic", "any"]
 

@@ -1,8 +1,8 @@
 from fastapi import FastAPI, HTTPException
 
-from backend.app.recommender import recommend_cars
-from backend.app.schemas import RecommendationPreferences, RecommendationResponse, ShortlistCreateResponse, ShortlistResponse
-from backend.app.storage import create_shortlist, get_shortlist
+from .recommender import recommend_cars
+from .schemas import RecommendationPreferences, RecommendationResponse, ShortlistCreateResponse, ShortlistResponse
+from .storage import create_shortlist, get_shortlist
 
 APP_NAME = "car-shortlist-backend"
 

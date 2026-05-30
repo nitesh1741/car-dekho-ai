@@ -2,7 +2,7 @@ import json
 from collections.abc import Iterable
 from pathlib import Path
 
-from backend.app.models import Car
+from .models import Car
 
 DEFAULT_DATA_PATH = Path(__file__).parent / "data" / "cars.json"
 
