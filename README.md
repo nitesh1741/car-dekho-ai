@@ -4,7 +4,7 @@ Car Shortlist Assistant is a full-stack web app for the CarDekho Group AI-native
 
 ## Current Status
 
-Phase 3 adds the validated backend seed dataset, typed car domain model, and repository loader.
+Phase 4 adds deterministic recommendation scoring with explainable reasons, tradeoffs, and matched criteria.
 
 ## Planned Architecture
 
@@ -20,6 +20,10 @@ The MVP will focus on a guided recommendation flow:
 2. FastAPI scores a curated seed dataset using deterministic weighted criteria.
 3. Next.js renders the top recommendations with reasons, tradeoffs, and comparison details.
 4. Buyer can save a shortlist through the backend.
+
+## Recommendation Model
+
+The backend scoring engine currently weighs budget fit, usage fit, fuel preference, safety priority, mileage priority, family/body fit, and transmission preference. It returns a ranked list with a numeric score, positive reasons, tradeoffs, and a criteria-level breakdown.
 
 ## Deliberately Cut
 
