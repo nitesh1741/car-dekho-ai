@@ -25,6 +25,27 @@ The MVP will focus on a guided recommendation flow:
 
 The backend scoring engine currently weighs budget fit, usage fit, fuel preference, safety priority, mileage priority, family/body fit, and transmission preference. It returns a ranked list with a numeric score, positive reasons, tradeoffs, and a criteria-level breakdown.
 
+## Backend API
+
+- `GET /health`: service status.
+- `POST /recommendations`: ranked car recommendations for buyer preferences.
+
+Sample recommendation request:
+
+```json
+{
+  "budgetMinLakh": 8,
+  "budgetMaxLakh": 16,
+  "primaryUsage": "mixed",
+  "preferredFuelTypes": ["petrol"],
+  "preferredBodyTypes": ["compact_suv"],
+  "familySize": 4,
+  "safetyPriority": 5,
+  "mileagePriority": 3,
+  "transmissionPreference": "automatic"
+}
+```
+
 ## Deliberately Cut
 
 - Authentication.

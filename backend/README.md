@@ -5,6 +5,7 @@ FastAPI backend for the Car Shortlist Assistant.
 ## Current Capabilities
 
 - `GET /health` returns backend service status.
+- `POST /recommendations` returns ranked car recommendations for buyer preferences.
 - `app.repository.load_cars()` loads and validates the curated seed dataset.
 - `app.repository.get_car_by_id()` finds a car by stable dataset ID.
 - `app.recommender.recommend_cars()` scores and ranks cars from buyer preferences.
@@ -31,6 +32,28 @@ Expected response:
   "service": "car-shortlist-backend"
 }
 ```
+
+Recommendation request:
+
+```text
+POST http://127.0.0.1:8000/recommendations
+```
+
+```json
+{
+  "budgetMinLakh": 8,
+  "budgetMaxLakh": 16,
+  "primaryUsage": "mixed",
+  "preferredFuelTypes": ["petrol"],
+  "preferredBodyTypes": ["compact_suv"],
+  "familySize": 4,
+  "safetyPriority": 5,
+  "mileagePriority": 3,
+  "transmissionPreference": "automatic"
+}
+```
+
+The response includes ranked recommendations with each car's score, reasons, tradeoffs, and criteria-level scoring breakdown.
 
 ## Test
 
