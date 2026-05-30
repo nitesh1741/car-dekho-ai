@@ -2,6 +2,12 @@
 
 FastAPI backend for the Car Shortlist Assistant.
 
+## Current Capabilities
+
+- `GET /health` returns backend service status.
+- `app.repository.load_cars()` loads and validates the curated seed dataset.
+- `app.repository.get_car_by_id()` finds a car by stable dataset ID.
+
 ## Run Locally
 
 From the `backend/` directory:

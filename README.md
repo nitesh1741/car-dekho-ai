@@ -4,7 +4,7 @@ Car Shortlist Assistant is a full-stack web app for the CarDekho Group AI-native
 
 ## Current Status
 
-Phase 2 adds the FastAPI backend foundation with a `/health` endpoint and pytest coverage.
+Phase 3 adds the validated backend seed dataset, typed car domain model, and repository loader.
 
 ## Planned Architecture
 
@@ -54,6 +54,12 @@ GET http://127.0.0.1:8000/health
 ```
 
 Frontend setup commands will be added in Phase 6.
+
+Dataset validation:
+
+```powershell
+python -c "from backend.app.repository import load_cars; print(len(load_cars()))"
+```
 
 ## Testing
 
