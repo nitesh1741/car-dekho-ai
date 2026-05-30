@@ -1,11 +1,10 @@
-from typing import Literal
+from typing import Literal, List
 
 from pydantic import BaseModel, ConfigDict, Field, model_validator
 
 from backend.app.models import BodyType, Car, FuelType, UsageTag
 
 TransmissionPreference = Literal["manual", "automatic", "any"]
-
 
 class RecommendationPreferences(BaseModel):
     model_config = ConfigDict(extra="forbid")
@@ -26,7 +25,6 @@ class RecommendationPreferences(BaseModel):
             raise ValueError("budgetMaxLakh must be greater than or equal to budgetMinLakh")
         return self
 
-
 class MatchedCriteria(BaseModel):
     model_config = ConfigDict(extra="forbid")
 
@@ -38,7 +36,6 @@ class MatchedCriteria(BaseModel):
     familyBody: float
     transmission: float
 
-
 class RecommendedCar(BaseModel):
     model_config = ConfigDict(extra="forbid")
 
@@ -48,8 +45,18 @@ class RecommendedCar(BaseModel):
     tradeoffs: list[str]
     matchedCriteria: MatchedCriteria
 
-
 class RecommendationResponse(BaseModel):
     model_config = ConfigDict(extra="forbid")
 
     recommendations: list[RecommendedCar]
+
+# New shortlist schemas
+class ShortlistCreateResponse(BaseModel):
+    model_config = ConfigDict(extra="forbid")
+    shortlistId: str
+
+class ShortlistResponse(BaseModel):
+    model_config = ConfigDict(extra="forbid")
+    preferences: RecommendationPreferences
+    recommendations: List[RecommendedCar]
+
