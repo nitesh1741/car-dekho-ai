@@ -11,6 +11,22 @@ app = FastAPI(
     version="0.1.0",
 )
 
+# Enable CORS for the Vercel frontend
+from fastapi.middleware.cors import CORSMiddleware
+
+origins = [
+    "https://car-dekho-ai.vercel.app",
+    "http://localhost:3000",  # local dev convenience
+]
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
 
 @app.get("/health", tags=["system"])
 def health_check() -> dict[str, str]:
